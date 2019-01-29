@@ -4,10 +4,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const serveStatic = require("serve-static");
+const path = require('path');
 
 // Inicializacion variables
 const app = express();
 
+app.use(serveStatic(path.join(__dirname, 'dist')));
 app.use(cors());
 
 app.use(express.static('public'));
@@ -50,7 +53,7 @@ mongoose.connection.openUri(
 mongoose.set('useCreateIndex', true);
 
 // Escuchar petciones
-var server = app.listen(process.env.PORT || 8000, function () {
+var server = app.listen(process.env.PORT || 80, function () {
     var port = server.address().port;
     console.log("App now running on port", port);
 });
