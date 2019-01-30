@@ -34,6 +34,51 @@ app.get('/', (req, res) => {
         })
 })
 
+// Obtener los partes segun filtro
+app.get('/:estado/:valor/estado', (req, res) => {
+
+    // eslint-disable-next-line no-unused-vars
+    const e = req.params.estado
+    const v = req.params.valor
+
+    let criteria = {}
+
+    if (e === 'reparado') {
+        criteria = { reparado: v }
+    }
+
+    if (e === 'cerrado') {
+        criteria = { cerrado: v }
+    }
+
+    Partes.find(criteria)
+        .exec((err, partes) => {
+            if (err) {
+                return res.status(500).json({
+                    ok: false,
+                    mensaje: 'Error en base de partes',
+                    errors: err
+                });
+            }
+
+            Partes.countDocuments({}, (err, cuenta) => {
+                if (err) {
+                    return res.status(400).json({
+                        ok: false,
+                        mensaje: 'Error en base de partes',
+                        errors: err
+                    });
+                }
+
+                res.status(200).json({
+                    ok: true,
+                    partes,
+                    cuenta
+                });
+            });
+        })
+})
+
 // Actualiza parte
 app.put('/:id', (req, res) => {
     var id = req.params.id;

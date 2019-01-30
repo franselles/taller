@@ -36,6 +36,23 @@ export async function getPartes({ commit }) {
     }
 }
 
+export async function getPartesFiltro({ commit }, payload) {
+    try {
+        const { data } = await Vue.axios({
+            method: 'get',
+            url: `/partes/${payload}/true/estado`,
+        })
+        commit('setPartes', data.partes)
+    } catch (e) {
+        console.log('todosError', e.message)
+        console.log(e.response.data);
+        console.log(e.response.status);
+        console.log(e.response.headers);
+    } finally {
+        console.log('La petición para obtener los partes ha finalizado')
+    }
+}
+
 export async function addParte({ dispatch }, payload) {
     try {
         await Vue.axios({

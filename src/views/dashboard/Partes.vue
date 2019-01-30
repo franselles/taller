@@ -1,24 +1,20 @@
 <template>
   <section>
     <div class="field">
-      <label class="label">Busqueda por averia</label>
-      <div class="control">
-        <input class="input" type="text" placeholder="Text input">
-      </div>
+      <label class="label">Visualiza partes que esten ...</label>
     </div>
-
     <div class="field">
       <div class="control">
         <label class="radio">
-          <input type="radio" name="question">
+          <input type="radio" name="filtro" v-model="filtro" value="T" @change="aplicaFiltro">
           Todos
         </label>
         <label class="radio">
-          <input type="radio" name="question">
+          <input type="radio" name="filtro" v-model="filtro" value="R" @change="aplicaFiltro">
           Reparados
         </label>
         <label class="radio">
-          <input type="radio" name="question">
+          <input type="radio" name="filtro" v-model="filtro" value="C" @change="aplicaFiltro">
           Cerrados
         </label>
       </div>
@@ -95,11 +91,12 @@ export default {
         fecha_f: "",
         reparado: false,
         cerrado: false
-      }
+      },
+      filtro: "T"
     };
   },
   methods: {
-    ...mapActions("partes", ["getPartes"]),
+    ...mapActions("partes", ["getPartes", "getPartesFiltro"]),
     ...mapMutations("partes", ["setParte", "setNuevoParte"]),
     editarParte(payload) {
       this.setParte(payload);
@@ -110,6 +107,19 @@ export default {
       this.setParte(this.parteVacio);
       this.setNuevoParte(true);
       this.$router.push({ name: "parte" });
+    },
+    aplicaFiltro() {
+      switch (this.filtro) {
+        case "T":
+          this.getPartes();
+          break;
+        case "R":
+          this.getPartesFiltro("reparado");
+          break;
+        case "C":
+          this.getPartesFiltro("cerrado");
+          break;
+      }
     }
   },
   computed: {
