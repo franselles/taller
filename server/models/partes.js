@@ -8,6 +8,8 @@ var tallerPartesSchema = new Schema(
         fecha: { type: String },
         matricula: { type: String },
         vehiculo: { type: String },
+        motivo: { type: String },
+        km: { type: Number },
         averia: { type: String },
         reparacion: [{
             linea: { type: String },

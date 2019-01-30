@@ -37,24 +37,27 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Mecanico</th>
           <th>Fecha</th>
           <th>Matricula</th>
-          <th>Vehiculo</th>
+          <th>Averia</th>
           <th>Reparado</th>
-          <th>Cerrado</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="parte in partes" :key="parte._id">
-          <th></th>
-          <td>{{ parte.mecanico }}</td>
+        <tr v-for="(parte, index) in partes" :key="parte._id">
+          <th>{{ index + 1 }}</th>
           <td>{{ parte.fecha }}</td>
           <td>{{ parte.matricula }}</td>
-          <td>{{ parte.vehiculo }}</td>
-          <td>{{ parte.reparado }}</td>
-          <td>{{ parte.cerrado }}</td>
+          <td>{{ parte.motivo }}</td>
+          <td>
+            <span v-if="parte.reparado" class="icon has-text-success">
+              <i class="fas fa-check-circle fa-lg"></i>
+            </span>
+            <span v-else class="icon has-text-danger">
+              <i class="fas fa-circle fa-lg"></i>
+            </span>
+          </td>
           <td>
             <a class="button is-success" @click="editarParte(parte)">
               <span class="icon">

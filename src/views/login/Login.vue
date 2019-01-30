@@ -9,19 +9,17 @@
             <figure class="avatar">
               <img src="../../assets/mecanica.png">
             </figure>
-            <form>
+            <form @submit.prevent="login">
               <div class="field">
                 <div class="control">
                   <input class="input is-large" type="password" placeholder="Su PIN" v-model="pin">
                 </div>
               </div>
-              <button class="button is-block is-info is-large is-fullwidth" @click="login">Login</button>
+              <button class="button is-block is-info is-large is-fullwidth" type="submit">Login</button>
             </form>
           </div>
           <p class="has-text-grey">
-            <a href="../">Opcion 1</a> &nbsp;·&nbsp;
-            <a href="../">Opcion 1</a> &nbsp;·&nbsp;
-            <a href="../">Opcion 1</a>
+            <a href="../">0.1.3</a> &nbsp;·&nbsp;
           </p>
         </div>
       </div>

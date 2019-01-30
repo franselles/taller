@@ -7,6 +7,8 @@ export default {
         fecha: '',
         matricula: '',
         vehiculo: '',
+        motivo: '',
+        km: '',
         averia: '',
         reparacion: [],
         observaciones: '',
@@ -20,7 +22,6 @@ export default {
         concepto: '',
         cdad_horas: '',
         importe: '',
-        total: ''
     },
     nuevoParte: true,
 }

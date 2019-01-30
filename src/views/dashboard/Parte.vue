@@ -61,8 +61,31 @@
         </div>
       </div>
       <div class="columns">
+        <div class="column is-6">
+          <label class="label" for="motivo">Averia</label>
+          <div class="control">
+            <input
+              id="motivo"
+              name="motivo"
+              type="text"
+              placeholder="Averia"
+              class="input"
+              v-model="parte.motivo"
+            >
+            <p class="help">Averia</p>
+          </div>
+        </div>
+        <div class="column is-3">
+          <label class="label" for="km">KM / Horometro</label>
+          <div class="control">
+            <input id="km" name="km" type="number" class="input" v-model="parte.km">
+            <p class="help">Kilometros / Horometro</p>
+          </div>
+        </div>
+      </div>
+      <div class="columns">
         <div class="column">
-          <label class="label" for="averia">Averia</label>
+          <label class="label" for="averia">Descripción averia</label>
           <div class="control">
             <textarea
               id="averia"
@@ -72,7 +95,7 @@
               rows="8"
               v-model="parte.averia"
             ></textarea>
-            <p class="help">Averia</p>
+            <p class="help">Descripción detallada de la averia</p>
           </div>
         </div>
       </div>
@@ -208,14 +231,21 @@
           </div>
         </div>
       </div>
-      <button
-        type="button"
-        class="button is-link"
-        @click="guardaParte(parte.reparacion)"
-      >GUARDAR PARTE</button>
-      <button type="button" class="button is-warning" @click="cancelaParte">CANCELAR</button>
-      <button type="button" class="button is-danger" @click="borraParte">ELIMINAR</button>
+      <div class="buttons are-medium">
+        <button
+          type="button"
+          class="button is-link"
+          @click="guardaParte(parte.reparacion)"
+        >GUARDAR PARTE</button>
+        <button type="button" class="button is-warning" @click="cancelaParte">CANCELAR</button>
+        <button type="button" class="button is-danger" @click="borraParte">ELIMINAR</button>
+      </div>
     </form>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>Parte de trabajo de taller</p>
+      </div>
+    </footer>
   </section>
 </template>
 
