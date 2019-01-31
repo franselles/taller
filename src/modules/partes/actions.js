@@ -37,10 +37,45 @@ export async function getPartes({ commit }) {
 }
 
 export async function getPartesFiltro({ commit }, payload) {
+
+    let field = ""
+    let value = null
+    let url = ''
+
+    switch (payload) {
+        case "T":
+            field = null
+            value = null
+            break;
+        case "R":
+            field = "reparado"
+            value = true
+            break;
+        case "SR":
+            field = "reparado"
+            value = false
+            break;
+        case "C":
+            field = "cerrado"
+            value = true
+            break;
+        case "SC":
+            field = "cerrado"
+            value = false
+            break;
+    }
+
+
+    if (payload === "T") {
+        url = `/partes`
+    } else {
+        url = `/partes/${field}/${value}/estado`
+    }
+
     try {
         const { data } = await Vue.axios({
             method: 'get',
-            url: `/partes/${payload.action}/${payload.value}/estado`,
+            url: url,
         })
         commit('setPartes', data.partes)
     } catch (e) {
@@ -53,7 +88,7 @@ export async function getPartesFiltro({ commit }, payload) {
     }
 }
 
-export async function addParte({ dispatch }, payload) {
+export async function addParte({ dispatch, state }, payload) {
     try {
         await Vue.axios({
             method: 'post',
@@ -73,7 +108,7 @@ export async function addParte({ dispatch }, payload) {
                 cerrado: payload.cerrado,
             },
         })
-        dispatch('getPartes')
+        dispatch('getPartesFiltro', state.filtroPartes)
     } catch (e) {
         console.log(e.message)
         console.log(e.response.data);
@@ -84,7 +119,7 @@ export async function addParte({ dispatch }, payload) {
     }
 }
 
-export async function updateParte({ dispatch }, payload) {
+export async function updateParte({ dispatch, state }, payload) {
     try {
         await Vue.axios({
             method: 'PUT',
@@ -104,7 +139,7 @@ export async function updateParte({ dispatch }, payload) {
                 cerrado: payload.cerrado,
             }
         })
-        dispatch('getPartes')
+        dispatch('getPartesFiltro', state.filtroPartes)
     } catch (e) {
         console.log(e.message)
         console.log(e.response.data);

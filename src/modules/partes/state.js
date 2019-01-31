@@ -24,4 +24,5 @@ export default {
         importe: '',
     },
     nuevoParte: true,
+    filtroPartes: 'SR'
 }

@@ -93,6 +93,7 @@ export default {
   components: {},
   props: [],
   mounted() {
+    this.filtro = this.filtroPartes;
     this.aplicaFiltro();
   },
   data() {
@@ -109,12 +110,12 @@ export default {
         reparado: false,
         cerrado: false
       },
-      filtro: "SR"
+      filtro: ""
     };
   },
   methods: {
     ...mapActions("partes", ["getPartes", "getPartesFiltro"]),
-    ...mapMutations("partes", ["setParte", "setNuevoParte"]),
+    ...mapMutations("partes", ["setParte", "setNuevoParte", "setFiltroPartes"]),
     editarParte(payload) {
       this.setParte(payload);
       this.setNuevoParte(false);
@@ -126,27 +127,28 @@ export default {
       this.$router.push({ name: "parte" });
     },
     aplicaFiltro() {
+      this.setFiltroPartes(this.filtro);
       switch (this.filtro) {
         case "T":
-          this.getPartes();
+          this.getPartesFiltro(this.filtro);
           break;
         case "R":
-          this.getPartesFiltro({ action: "reparado", value: true });
+          this.getPartesFiltro(this.filtro);
           break;
         case "C":
-          this.getPartesFiltro({ action: "cerrado", value: true });
+          this.getPartesFiltro(this.filtro);
           break;
         case "SR":
-          this.getPartesFiltro({ action: "reparado", value: false });
+          this.getPartesFiltro(this.filtro);
           break;
         case "SC":
-          this.getPartesFiltro({ action: "cerrado", value: false });
+          this.getPartesFiltro(this.filtro);
           break;
       }
     }
   },
   computed: {
-    ...mapState("partes", ["partes"])
+    ...mapState("partes", ["partes", "filtroPartes"])
   }
 };
 </script>

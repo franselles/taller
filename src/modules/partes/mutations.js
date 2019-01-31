@@ -18,3 +18,7 @@ export function setVehiculos(state, payload) {
     state.vehiculos = []
     state.vehiculos = payload;
 }
+
+export function setFiltroPartes(state, payload) {
+    state.filtroPartes = payload;
+}
