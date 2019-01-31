@@ -40,7 +40,7 @@ export async function getPartesFiltro({ commit }, payload) {
     try {
         const { data } = await Vue.axios({
             method: 'get',
-            url: `/partes/${payload}/true/estado`,
+            url: `/partes/${payload.action}/${payload.value}/estado`,
         })
         commit('setPartes', data.partes)
     } catch (e) {

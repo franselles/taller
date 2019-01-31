@@ -6,8 +6,8 @@
     <div class="field">
       <div class="control">
         <label class="radio">
-          <input type="radio" name="filtro" v-model="filtro" value="T" @change="aplicaFiltro">
-          Todos
+          <input type="radio" name="filtro" v-model="filtro" value="SR" @change="aplicaFiltro">
+          Sin reparar
         </label>
         <label class="radio">
           <input type="radio" name="filtro" v-model="filtro" value="R" @change="aplicaFiltro">
@@ -16,6 +16,14 @@
         <label class="radio">
           <input type="radio" name="filtro" v-model="filtro" value="C" @change="aplicaFiltro">
           Cerrados
+        </label>
+        <label class="radio">
+          <input type="radio" name="filtro" v-model="filtro" value="SC" @change="aplicaFiltro">
+          Sin cerrar
+        </label>
+        <label class="radio">
+          <input type="radio" name="filtro" v-model="filtro" value="T" @change="aplicaFiltro">
+          Todos
         </label>
       </div>
     </div>
@@ -37,6 +45,7 @@
           <th>Matricula</th>
           <th>Averia</th>
           <th>Reparado</th>
+          <th>Cerrado</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -55,7 +64,15 @@
             </span>
           </td>
           <td>
-            <a class="button is-success" @click="editarParte(parte)">
+            <span v-if="parte.cerrado" class="icon has-text-success">
+              <i class="fas fa-check-circle fa-lg"></i>
+            </span>
+            <span v-else class="icon has-text-danger">
+              <i class="fas fa-circle fa-lg"></i>
+            </span>
+          </td>
+          <td>
+            <a class="button is-link" @click="editarParte(parte)">
               <span class="icon">
                 <i class="fas fa-edit"></i>
               </span>
@@ -76,7 +93,7 @@ export default {
   components: {},
   props: [],
   mounted() {
-    this.getPartes();
+    this.aplicaFiltro();
   },
   data() {
     return {
@@ -92,7 +109,7 @@ export default {
         reparado: false,
         cerrado: false
       },
-      filtro: "T"
+      filtro: "SR"
     };
   },
   methods: {
@@ -114,10 +131,16 @@ export default {
           this.getPartes();
           break;
         case "R":
-          this.getPartesFiltro("reparado");
+          this.getPartesFiltro({ action: "reparado", value: true });
           break;
         case "C":
-          this.getPartesFiltro("cerrado");
+          this.getPartesFiltro({ action: "cerrado", value: true });
+          break;
+        case "SR":
+          this.getPartesFiltro({ action: "reparado", value: false });
+          break;
+        case "SC":
+          this.getPartesFiltro({ action: "cerrado", value: false });
           break;
       }
     }

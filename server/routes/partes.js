@@ -7,6 +7,7 @@ var app = express()
 // Obtener todos los partes
 app.get('/', (req, res) => {
     Partes.find({})
+        .sort({ fecha: 1 })
         .exec((err, partes) => {
             if (err) {
                 return res.status(500).json({
@@ -52,6 +53,7 @@ app.get('/:estado/:valor/estado', (req, res) => {
     }
 
     Partes.find(criteria)
+        .sort({ fecha: 1 })
         .exec((err, partes) => {
             if (err) {
                 return res.status(500).json({
