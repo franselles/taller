@@ -193,6 +193,12 @@
         </div>
       </div>
       <div class="columns">
+        <div class="column is-three-fifths"></div>
+        <div class="column">
+          <h3 class="title is-3">TOTAL: {{ suma }}</h3>
+        </div>
+      </div>
+      <div class="columns">
         <div class="column">
           <label class="label" for="observaciones">Observaciones de la reparación</label>
           <div class="control">
@@ -347,7 +353,14 @@ export default {
     }
   },
   computed: {
-    ...mapState("partes", ["parte", "nuevoParte", "vehiculos"])
+    ...mapState("partes", ["parte", "nuevoParte", "vehiculos"]),
+    suma() {
+      let t = 0;
+      this.parte.reparacion.forEach(x => {
+        t = t + x.cdad_horas * x.importe;
+      });
+      return t;
+    }
   }
 };
 </script>

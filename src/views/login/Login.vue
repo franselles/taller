@@ -19,7 +19,7 @@
             </form>
           </div>
           <p class="has-text-grey">
-            <a href="../">0.1.10</a> &nbsp;·&nbsp;
+            <a href="../">0.1.11</a> &nbsp;·&nbsp;
           </p>
         </div>
       </div>
