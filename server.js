@@ -37,8 +37,8 @@ app.use('/api/v1/', appRoutes);
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
 
-// db = 'mongodb://localhost/userserious';
-db = 'mongodb://f54n:Uzituxez1800@ds145295.mlab.com:45295/userserious';
+db = 'mongodb://localhost/userserious';
+// db = 'mongodb://f54n:Uzituxez1800@ds145295.mlab.com:45295/userserious';
 
 // Conexión a la base de datos
 mongoose.connection.openUri(

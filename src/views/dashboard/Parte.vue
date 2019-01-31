@@ -210,24 +210,36 @@
       </div>
       <div class="columns">
         <div class="column is-3">
+          <div class="field">
+            <input
+              id="switchReparado"
+              type="checkbox"
+              name="switchReparado"
+              class="switch is-rounded is-success"
+              v-model="parte.reparado"
+            >
+            <label for="switchReparado">Reparación COMPLETADA</label>
+          </div>
+        </div>
+        <div class="column is-3">
+          <div class="field">
+            <input
+              id="switchCerrado"
+              type="checkbox"
+              name="switchCerrado"
+              class="switch is-rounded is-success"
+              v-model="parte.cerrado"
+            >
+            <label for="switchCerrado">Reparación revisada y CERRADA</label>
+          </div>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-3">
           <label class="label" for="fecha_f">Fecha fin reparación</label>
           <div class="control">
             <input id="fecha_f" name="fecha_f" type="date" class="input" v-model="parte.fecha_f">
             <p class="help">Fecha fin reparación</p>
-          </div>
-        </div>
-        <div class="column is-3">
-          <label class="label" for="reparado">Reparado</label>
-          <div class="control">
-            <input id="reparado" name="reparado" type="checkbox" v-model="parte.reparado">
-            <p class="help">Reparado</p>
-          </div>
-        </div>
-        <div class="column is-3">
-          <label class="label" for="cerrado">Cerrado</label>
-          <div class="control">
-            <input id="cerrado" name="cerrado" type="checkbox" v-model="parte.cerrado">
-            <p class="help">Cerrado</p>
           </div>
         </div>
       </div>
