@@ -254,9 +254,15 @@
           type="button"
           class="button is-link"
           @click="guardaParte(parte.reparacion)"
+          :disabled="salvado"
         >GUARDAR PARTE</button>
         <button type="button" class="button is-warning" @click="cancelaParte">CANCELAR</button>
-        <button type="button" class="button is-danger" @click="borraParte">ELIMINAR</button>
+        <button
+          type="button"
+          class="button is-danger"
+          @click="borraParte"
+          :disabled="nuevoParte"
+        >ELIMINAR</button>
       </div>
     </form>
     <footer class="footer">
@@ -285,7 +291,8 @@ export default {
         concepto: null,
         cdad_horas: null,
         importe: null
-      }
+      },
+      salvado: false
     };
   },
   methods: {
@@ -316,6 +323,7 @@ export default {
       };
     },
     guardaParte() {
+      this.salvado = true;
       if (this.nuevoParte) {
         this.addParte(this.parte);
       } else {
