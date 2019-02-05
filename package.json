@@ -1,6 +1,6 @@
 {
   "name": "zaleeful-prog-77123",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -17,7 +17,7 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "mongoose": "^5.4.9",
-    "vue": "^2.6.0",
+    "vue": "^2.6.2",
     "vue-axios": "^2.1.4",
     "vue-router": "^3.0.1",
     "vuex": "^3.1.0"
@@ -27,9 +27,9 @@
     "@vue/cli-plugin-eslint": "^3.3.0",
     "@vue/cli-service": "^3.3.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.12.1",
+    "eslint": "^5.13.0",
     "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.5.22"
+    "vue-template-compiler": "^2.6.2"
   },
   "eslintConfig": {
     "root": true,
