@@ -100,7 +100,7 @@ export default {
     return {
       parteVacio: {
         mecanico: "",
-        fecha: "",
+        fecha: new Date().toISOString().split("T")[0],
         matricula: "",
         vehiculo: "",
         averia: "",
