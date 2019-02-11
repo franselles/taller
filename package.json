@@ -1,13 +1,14 @@
 {
   "name": "zaleeful-prog-77123",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "webpack",
     "lint": "vue-cli-service lint",
     "start": "node server.js",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "heroku-postbuild": "vue-cli-service build"
   },
   "heroku-run-build-script": true,
   "dependencies": {
