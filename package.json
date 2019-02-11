@@ -1,25 +1,23 @@
 {
   "name": "zaleeful-prog-77123",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "webpack",
+    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "node server.js",
-    "postinstall": "npm run build",
-    "heroku-postbuild": "vue-cli-service build"
+    "start": "node server.js"
   },
   "heroku-run-build-script": true,
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
-    "bulma": "^0.7.2",
+    "bulma": "^0.7.4",
     "bulma-switch": "^2.0.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
-    "mongoose": "^5.4.9",
-    "vue": "^2.6.2",
+    "mongoose": "^5.4.11",
+    "vue": "^2.6.5",
     "vue-axios": "^2.1.4",
     "vue-router": "^3.0.1",
     "vuex": "^3.1.0"
@@ -31,7 +29,7 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.13.0",
     "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.6.2"
+    "vue-template-compiler": "^2.6.5"
   },
   "eslintConfig": {
     "root": true,
