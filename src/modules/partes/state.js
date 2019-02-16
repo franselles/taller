@@ -28,7 +28,7 @@ export default {
     filtroPartes: 'SR',
     pagination: {
         page: 1,
-        perPage: 3,
+        perPage: 10,
         totalPages: 1
     }
 }
