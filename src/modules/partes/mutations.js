@@ -22,3 +22,23 @@ export function setVehiculos(state, payload) {
 export function setFiltroPartes(state, payload) {
     state.filtroPartes = payload;
 }
+
+export function setPage(state, payload) {
+    state.pagination.page = payload
+}
+
+export function setPages(state) {
+    state.pagination.page = 1
+    let numberOfPages = Math.ceil(
+        state.partes.length / state.pagination.perPage
+    )
+    state.pagination.totalPages = numberOfPages;
+}
+
+/* export function paginate(state) {
+    let page = state.pagination.page;
+    let perPage = state.pagination.perPage;
+    let from = page * perPage - perPage;
+    let to = page * perPage;
+    state.partesPaginados = state.partes.slice(from, to);
+} */

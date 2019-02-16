@@ -50,7 +50,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(parte, index) in partes" :key="parte._id">
+        <tr v-for="(parte, index) in partesPaginados" :key="parte._id">
           <th>{{ index + 1 }}</th>
           <td>{{ parte.fecha }}</td>
           <td>{{ parte.matricula }}</td>
@@ -82,15 +82,28 @@
         </tr>
       </tbody>
     </table>
+    <paginate
+      :pageCount="pagination.totalPages"
+      :click-handler="onChange"
+      :prevText="'Prev'"
+      :nextText="'Next'"
+      :container-class="'pagination-list'"
+      :page-link-class="'pagination-link'"
+      :prev-link-class="'pagination-previous'"
+      :next-link-class="'pagination-next'"
+      :active-class="'pagination-link is-current'"
+      :no-li-surround="true"
+    ></paginate>
   </section>
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
+import Paginate from "vuejs-paginate";
 
 export default {
   name: "partes-vue",
-  components: {},
+  components: { Paginate },
   props: [],
   mounted() {
     this.filtro = this.filtroPartes;
@@ -115,7 +128,13 @@ export default {
   },
   methods: {
     ...mapActions("partes", ["getPartes", "getPartesFiltro"]),
-    ...mapMutations("partes", ["setParte", "setNuevoParte", "setFiltroPartes"]),
+    ...mapMutations("partes", [
+      "setParte",
+      "setNuevoParte",
+      "setFiltroPartes",
+      "setPage"
+      // "paginate"
+    ]),
     editarParte(payload) {
       this.setParte(payload);
       this.setNuevoParte(false);
@@ -145,10 +164,20 @@ export default {
           this.getPartesFiltro(this.filtro);
           break;
       }
+    },
+    onChange(page) {
+      this.setPage(page);
+      // this.paginate();
     }
   },
   computed: {
-    ...mapState("partes", ["partes", "filtroPartes"])
+    ...mapState("partes", [
+      "partes",
+      "filtroPartes",
+      "pagination",
+      "partesPaginados"
+    ]),
+    ...mapGetters("partes", ["partesPaginados"])
   }
 };
 </script>

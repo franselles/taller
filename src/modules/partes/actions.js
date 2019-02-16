@@ -78,6 +78,7 @@ export async function getPartesFiltro({ commit }, payload) {
             url: url,
         })
         commit('setPartes', data.partes)
+        commit('setPages')
     } catch (e) {
         console.log('todosError', e.message)
         console.log(e.response.data);

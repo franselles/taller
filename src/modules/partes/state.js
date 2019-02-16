@@ -1,6 +1,7 @@
 export default {
     partes: [
     ],
+    partesPaginados: [],
     vehiculos: [],
     parte: {
         mecanico: '',
@@ -24,5 +25,10 @@ export default {
         importe: '',
     },
     nuevoParte: true,
-    filtroPartes: 'SR'
+    filtroPartes: 'SR',
+    pagination: {
+        page: 1,
+        perPage: 3,
+        totalPages: 1
+    }
 }

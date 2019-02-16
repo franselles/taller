@@ -1,6 +1,6 @@
 {
   "name": "zaleeful-prog-77123",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -16,10 +16,11 @@
     "bulma-switch": "^2.0.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
-    "mongoose": "^5.4.11",
-    "vue": "^2.6.5",
+    "mongoose": "^5.4.12",
+    "vue": "^2.6.6",
     "vue-axios": "^2.1.4",
     "vue-router": "^3.0.1",
+    "vuejs-paginate": "^2.1.0",
     "vuex": "^3.1.0"
   },
   "devDependencies": {
@@ -28,8 +29,8 @@
     "@vue/cli-service": "^3.3.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.13.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.6.5"
+    "eslint-plugin-vue": "^5.2.1",
+    "vue-template-compiler": "^2.6.6"
   },
   "eslintConfig": {
     "root": true,
