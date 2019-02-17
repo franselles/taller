@@ -34,11 +34,3 @@ export function setPages(state) {
     )
     state.pagination.totalPages = numberOfPages;
 }
-
-/* export function paginate(state) {
-    let page = state.pagination.page;
-    let perPage = state.pagination.perPage;
-    let from = page * perPage - perPage;
-    let to = page * perPage;
-    state.partesPaginados = state.partes.slice(from, to);
-} */

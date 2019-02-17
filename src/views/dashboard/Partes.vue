@@ -51,7 +51,7 @@
       </thead>
       <tbody>
         <tr v-for="(parte, index) in partesPaginados" :key="parte._id">
-          <th>{{ index + 1 }}</th>
+          <th>{{ (index + 1) + ((pagination.page - 1) * 10) }}</th>
           <td>{{ parte.fecha }}</td>
           <td>{{ parte.matricula }}</td>
           <td>{{ parte.motivo }}</td>
@@ -167,16 +167,10 @@ export default {
     },
     onChange(page) {
       this.setPage(page);
-      // this.paginate();
     }
   },
   computed: {
-    ...mapState("partes", [
-      "partes",
-      "filtroPartes",
-      "pagination",
-      "partesPaginados"
-    ]),
+    ...mapState("partes", ["partes", "filtroPartes", "pagination"]),
     ...mapGetters("partes", ["partesPaginados"])
   }
 };

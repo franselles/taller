@@ -1,7 +1,6 @@
 export default {
     partes: [
     ],
-    partesPaginados: [],
     vehiculos: [],
     parte: {
         mecanico: '',
