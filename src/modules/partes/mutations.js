@@ -27,6 +27,10 @@ export function setPage(state, payload) {
     state.pagination.page = payload
 }
 
+export function setPerPage(state, payload) {
+    state.pagination.perPage = payload
+}
+
 export function setPages(state) {
     state.pagination.page = 1
     let numberOfPages = Math.ceil(

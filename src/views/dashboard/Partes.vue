@@ -1,30 +1,43 @@
 <template>
   <section>
-    <div class="field">
-      <label class="label">Visualiza partes que esten ...</label>
-    </div>
-    <div class="field">
-      <div class="control">
-        <label class="radio">
-          <input type="radio" name="filtro" v-model="filtro" value="SR" @change="aplicaFiltro">
-          Sin reparar
-        </label>
-        <label class="radio">
-          <input type="radio" name="filtro" v-model="filtro" value="R" @change="aplicaFiltro">
-          Reparados
-        </label>
-        <label class="radio">
-          <input type="radio" name="filtro" v-model="filtro" value="C" @change="aplicaFiltro">
-          Cerrados
-        </label>
-        <label class="radio">
-          <input type="radio" name="filtro" v-model="filtro" value="SC" @change="aplicaFiltro">
-          Sin cerrar
-        </label>
-        <label class="radio">
-          <input type="radio" name="filtro" v-model="filtro" value="T" @change="aplicaFiltro">
-          Todos
-        </label>
+    <div class="columns">
+      <div class="column is-6">
+        <div class="field">
+          <label class="label">Visualiza partes que esten ...</label>
+        </div>
+        <div class="field">
+          <div class="control">
+            <label class="radio">
+              <input type="radio" name="filtro" v-model="filtro" value="SR" @change="aplicaFiltro">
+              Sin reparar
+            </label>
+            <label class="radio">
+              <input type="radio" name="filtro" v-model="filtro" value="R" @change="aplicaFiltro">
+              Reparados
+            </label>
+            <label class="radio">
+              <input type="radio" name="filtro" v-model="filtro" value="C" @change="aplicaFiltro">
+              Cerrados
+            </label>
+            <label class="radio">
+              <input type="radio" name="filtro" v-model="filtro" value="SC" @change="aplicaFiltro">
+              Sin cerrar
+            </label>
+            <label class="radio">
+              <input type="radio" name="filtro" v-model="filtro" value="T" @change="aplicaFiltro">
+              Todos
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="column is-2">
+        Número de partes a visulizar
+        <input
+          class="input"
+          name="myPerPage"
+          type="number"
+          v-model="myPerPage"
+        >
       </div>
     </div>
     <div class="field is-grouped">
@@ -132,8 +145,8 @@ export default {
       "setParte",
       "setNuevoParte",
       "setFiltroPartes",
-      "setPage"
-      // "paginate"
+      "setPage",
+      "setPerPage"
     ]),
     editarParte(payload) {
       this.setParte(payload);
@@ -171,7 +184,18 @@ export default {
   },
   computed: {
     ...mapState("partes", ["partes", "filtroPartes", "pagination"]),
-    ...mapGetters("partes", ["partesPaginados"])
+    ...mapGetters("partes", ["partesPaginados"]),
+    myPerPage: {
+      // getter
+      get: function() {
+        return this.pagination.perPage;
+      },
+      // setter
+      set: function(newValue) {
+        this.setPerPage(newValue);
+        this.aplicaFiltro();
+      }
+    }
   }
 };
 </script>
