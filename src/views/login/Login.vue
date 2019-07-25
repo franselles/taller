@@ -7,19 +7,19 @@
           <p class="subtitle has-text-grey">Introduzca PIN para continuar.</p>
           <div class="box">
             <figure class="avatar">
-              <img src="../../assets/mecanica.png">
+              <img src="../../assets/mecanica.png" />
             </figure>
             <form @submit.prevent="login">
               <div class="field">
                 <div class="control">
-                  <input class="input is-large" type="password" placeholder="Su PIN" v-model="pin">
+                  <input class="input is-large" type="password" placeholder="Su PIN" v-model="pin" />
                 </div>
               </div>
               <button class="button is-block is-info is-large is-fullwidth" type="submit">Login</button>
             </form>
           </div>
           <p class="has-text-grey">
-            <a href="../">0.1.21</a> &nbsp;·&nbsp;
+            <a href="../">0.1.23</a> &nbsp;·&nbsp;
           </p>
         </div>
       </div>

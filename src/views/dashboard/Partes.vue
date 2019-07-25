@@ -8,23 +8,23 @@
         <div class="field">
           <div class="control">
             <label class="radio">
-              <input type="radio" name="filtro" v-model="filtro" value="SR" @change="aplicaFiltro">
+              <input v-model="filtro" type="radio" name="filtro" value="SR" @change="aplicaFiltro" />
               Sin reparar
             </label>
             <label class="radio">
-              <input type="radio" name="filtro" v-model="filtro" value="R" @change="aplicaFiltro">
+              <input v-model="filtro" type="radio" name="filtro" value="R" @change="aplicaFiltro" />
               Reparados
             </label>
             <label class="radio">
-              <input type="radio" name="filtro" v-model="filtro" value="C" @change="aplicaFiltro">
+              <input v-model="filtro" type="radio" name="filtro" value="C" @change="aplicaFiltro" />
               Cerrados
             </label>
             <label class="radio">
-              <input type="radio" name="filtro" v-model="filtro" value="SC" @change="aplicaFiltro">
+              <input v-model="filtro" type="radio" name="filtro" value="SC" @change="aplicaFiltro" />
               Sin cerrar
             </label>
             <label class="radio">
-              <input type="radio" name="filtro" v-model="filtro" value="T" @change="aplicaFiltro">
+              <input v-model="filtro" type="radio" name="filtro" value="T" @change="aplicaFiltro" />
               Todos
             </label>
           </div>
@@ -33,11 +33,11 @@
       <div class="column is-2">
         Número de partes a visulizar
         <input
+          v-model="myPerPage"
           class="input"
           name="myPerPage"
           type="number"
-          v-model="myPerPage"
-        >
+        />
       </div>
     </div>
     <div class="field is-grouped">
@@ -96,6 +96,7 @@
       </tbody>
     </table>
     <paginate
+      :value.sync="paginaActual"
       :pageCount="pagination.totalPages"
       :click-handler="onChange"
       :prevText="'Prev'"
@@ -118,10 +119,6 @@ export default {
   name: "partes-vue",
   components: { Paginate },
   props: [],
-  mounted() {
-    this.filtro = this.filtroPartes;
-    this.aplicaFiltro();
-  },
   data() {
     return {
       parteVacio: {
@@ -138,6 +135,30 @@ export default {
       },
       filtro: ""
     };
+  },
+  computed: {
+    ...mapState("partes", [
+      "partes",
+      "filtroPartes",
+      "pagination",
+      "paginaActual"
+    ]),
+    ...mapGetters("partes", ["partesPaginados"]),
+    myPerPage: {
+      // getter
+      get: function() {
+        return this.pagination.perPage;
+      },
+      // setter
+      set: function(newValue) {
+        this.setPerPage(newValue);
+        this.aplicaFiltro();
+      }
+    }
+  },
+  mounted() {
+    this.filtro = this.filtroPartes;
+    this.aplicaFiltro();
   },
   methods: {
     ...mapActions("partes", ["getPartes", "getPartesFiltro"]),
@@ -180,21 +201,6 @@ export default {
     },
     onChange(page) {
       this.setPage(page);
-    }
-  },
-  computed: {
-    ...mapState("partes", ["partes", "filtroPartes", "pagination"]),
-    ...mapGetters("partes", ["partesPaginados"]),
-    myPerPage: {
-      // getter
-      get: function() {
-        return this.pagination.perPage;
-      },
-      // setter
-      set: function(newValue) {
-        this.setPerPage(newValue);
-        this.aplicaFiltro();
-      }
     }
   }
 };
