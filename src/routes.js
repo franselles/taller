@@ -1,7 +1,7 @@
 export default [
     {
         path: '/',
-        redirect: '/login'
+        redirect: '/login',
     },
     {
         path: '/login',
@@ -18,13 +18,13 @@ export default [
             {
                 path: 'partes',
                 name: 'partes',
-                component: () => import('./views/dashboard/Partes.vue')
+                component: () => import('./views/dashboard/Partes.vue'),
             },
             {
                 path: 'parte',
                 name: 'parte',
-                component: () => import('./views/dashboard/Parte.vue')
+                component: () => import('./views/dashboard/Parte.vue'),
             },
-        ]
-    }
-]
+        ],
+    },
+];

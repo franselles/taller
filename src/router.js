@@ -1,35 +1,32 @@
 /* eslint-disable no-console */
-import Vue from 'vue'
-import Router from 'vue-router'
-import routes from './routes'
-import store from './store'
+import Vue from 'vue';
+import Router from 'vue-router';
+import routes from './routes';
+import store from './store';
 
-Vue.use(Router)
+Vue.use(Router);
 
 const router = new Router({
-  routes
-})
+    routes,
+});
 
 router.beforeEach((to, from, next) => {
+    const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+    // const urlLevel = to.matched.some(record => record.meta.level)
+    // const level = store.state.login.login.level
+    const isLogged = store.state.login.login.isLogged;
 
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
-  // const urlLevel = to.matched.some(record => record.meta.level)
-  // const level = store.state.login.login.level
-  const isLogged = store.state.login.login.isLogged
+    // console.log(requiresAuth, isLogged);
 
-  // console.log(requiresAuth, isLogged);
+    if (!isLogged && requiresAuth) {
+        next({
+            path: '/login',
+        });
+    } else {
+        next();
+    }
 
-
-  if (!isLogged && requiresAuth) {
-    next({
-      path: '/login'
-    })
-  } else {
-    next()
-  }
-
-
-  /*
+    /*
   let urlLevel
 
   to.matched.some(record => urlLevel = record.meta.level)
@@ -37,8 +34,7 @@ router.beforeEach((to, from, next) => {
   console.log(urlLevel)
   */
 
+    // next()
+});
 
-  // next()
-})
-
-export default router
+export default router;

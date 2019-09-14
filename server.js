@@ -40,13 +40,13 @@ db = 'mongodb://f54n:Uzituxez1800@ds145295.mlab.com:45295/userserious';
 
 // Conexión a la base de datos
 mongoose.connection.openUri(db, { useNewUrlParser: true }, err => {
-  if (err) throw err;
-  console.log(`Base de datos  ${db} \x1b[36m%s\x1b[0m`, 'online');
+    if (err) throw err;
+    console.log(`Base de datos  ${db} \x1b[36m%s\x1b[0m`, 'online');
 });
 mongoose.set('useCreateIndex', true);
 
 // Escuchar petciones
 var server = app.listen(process.env.PORT || 8000, function() {
-  var port = server.address().port;
-  console.log('App now running on port', port);
+    var port = server.address().port;
+    console.log('App now running on port', port);
 });

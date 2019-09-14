@@ -11,17 +11,19 @@ var tallerPartesSchema = new Schema(
         motivo: { type: String },
         km: { type: Number },
         averia: { type: String },
-        reparacion: [{
-            linea: { type: String },
-            fecha: { type: String },
-            concepto: { type: String },
-            cdad_horas: { type: Number },
-            importe: { type: Number }
-        }],
+        reparacion: [
+            {
+                linea: { type: String },
+                fecha: { type: String },
+                concepto: { type: String },
+                cdad_horas: { type: Number },
+                importe: { type: Number },
+            },
+        ],
         observaciones: { type: String },
         fecha_f: { type: String },
         reparado: { type: Boolean },
-        cerrado: { type: Boolean }
+        cerrado: { type: Boolean },
     },
     { collection: 'taller_partes' }
 );

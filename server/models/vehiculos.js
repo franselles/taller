@@ -13,7 +13,7 @@ var vehiculosSchema = new Schema(
         ult_itv: { type: String },
         prx_itv: { type: String },
         int_itv: { type: String },
-        nota: { type: String }
+        nota: { type: String },
     },
     { collection: 'vehiculos' }
 );
