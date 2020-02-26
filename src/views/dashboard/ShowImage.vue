@@ -37,7 +37,7 @@ export default {
   },
   computed: {
     url_img() {
-      return this.$store.state.workshopStore.currentImage;
+      return this.$store.state.orders.currentImage;
     }
   }
 };
