@@ -34,6 +34,11 @@ export default [
         path: 'detail',
         name: 'detail',
         component: () => import('./views/dashboard/Detail.vue')
+      },
+      {
+        path: 'showimage',
+        name: 'showimage',
+        component: () => import('./views/dashboard/ShowImage.vue')
       }
     ]
   }
