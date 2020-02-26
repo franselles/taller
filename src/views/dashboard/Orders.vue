@@ -64,7 +64,7 @@
       </thead>
       <tbody>
         <tr v-for="(order, index) in ordersPaged" :key="order._id">
-          <th>{{ index + 1 + (pagination.page - 1) * 10 }}</th>
+          <th>{{ index + 1 + (pagination.page - 1) * pagination.perPage }}</th>
           <td>{{ order.date }}</td>
           <td>{{ order.license_plate }}</td>
           <td>{{ order.fault }}</td>

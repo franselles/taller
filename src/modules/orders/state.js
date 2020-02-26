@@ -1,6 +1,6 @@
 export default {
   urlImgBb: 'https://api.imgbb.com/1/upload',
-  urlApi: '/api/v1/', // http://localhost:8080/api/    // /api/
+  urlApi: '/api/v1/', // http://localhost:8000/api/v1/    // /api/v1/
   order: {
     _id: null,
     date: null,

@@ -124,6 +124,8 @@ export async function getOrders({ commit, state }, payload) {
       url: state.urlApi + `workshop/orders/${payload}`
     });
     commit('setOrders', data);
+    commit('setPages');
+    commit('setPage', state.paginaActual);
   } catch (e) {
     console.log('todosError', e.message);
     console.log(e.response.data);

@@ -29,15 +29,17 @@
           <router-link :to="{ name: 'partes' }" class="navbar-item"
             >Partes</router-link
           >
-          <router-link :to="{ name: 'orders' }" class="navbar-item"
-            >Nuevo Partes</router-link
+          <router-link :to="{ name: 'orders' }" class="navbar-item">
+            Partes</router-link
           >
 
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">Opciones</a>
 
             <div class="navbar-dropdown">
-              <a class="navbar-item">Opcion 1</a>
+              <router-link :to="{ name: 'partes' }" class="navbar-item"
+                >Partes sistema anterior</router-link
+              >
               <a class="navbar-item">Opcion 2</a>
               <a class="navbar-item">Opcion 3</a>
               <hr class="navbar-divider" />

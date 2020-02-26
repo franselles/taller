@@ -28,7 +28,7 @@
               </button>
             </form>
           </div>
-          <p class="has-text-grey"><a href="../">0.1.27</a> &nbsp;·&nbsp;</p>
+          <p class="has-text-grey"><a href="../">0.1.28</a></p>
         </div>
       </div>
     </div>
