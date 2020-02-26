@@ -16,6 +16,7 @@
                     class="input is-large"
                     type="password"
                     placeholder="Su PIN"
+                    maxlength="4"
                     v-model="pin"
                   />
                 </div>
@@ -28,7 +29,7 @@
               </button>
             </form>
           </div>
-          <p class="has-text-grey"><a href="../">0.1.28</a></p>
+          <p class="has-text-grey"><a href="../">0.1.29</a></p>
         </div>
       </div>
     </div>

@@ -26,9 +26,6 @@
             >Inicio</router-link
           >
 
-          <router-link :to="{ name: 'partes' }" class="navbar-item"
-            >Partes</router-link
-          >
           <router-link :to="{ name: 'orders' }" class="navbar-item">
             Partes</router-link
           >
