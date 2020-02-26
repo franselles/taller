@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var vehiculosSchema = new Schema(
+var vehiclesSchema = new Schema(
   {
     numero: { type: String },
     matricula: { type: String },
@@ -13,9 +13,9 @@ var vehiculosSchema = new Schema(
     ult_itv: { type: String },
     prx_itv: { type: String },
     int_itv: { type: String },
-    nota: { type: String },
+    nota: { type: String }
   },
   { collection: 'vehiculos' }
 );
 
-module.exports = mongoose.model('TallerVehiculos', vehiculosSchema);
+module.exports = mongoose.model('Vehicles', vehiclesSchema);

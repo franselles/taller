@@ -12,16 +12,6 @@
                 v-model="filtro"
                 type="radio"
                 name="filtro"
-                value="SR"
-                @change="aplicaFiltro"
-              />
-              Sin reparar
-            </label>
-            <label class="radio">
-              <input
-                v-model="filtro"
-                type="radio"
-                name="filtro"
                 value="R"
                 @change="aplicaFiltro"
               />
@@ -32,30 +22,10 @@
                 v-model="filtro"
                 type="radio"
                 name="filtro"
-                value="C"
+                value="SR"
                 @change="aplicaFiltro"
               />
-              Cerrados
-            </label>
-            <label class="radio">
-              <input
-                v-model="filtro"
-                type="radio"
-                name="filtro"
-                value="SC"
-                @change="aplicaFiltro"
-              />
-              Sin cerrar
-            </label>
-            <label class="radio">
-              <input
-                v-model="filtro"
-                type="radio"
-                name="filtro"
-                value="T"
-                @change="aplicaFiltro"
-              />
-              Todos
+              Sin reparar
             </label>
           </div>
         </div>
@@ -88,18 +58,18 @@
           <th>Matricula</th>
           <th>Averia</th>
           <th>Reparado</th>
-          <th>Cerrado</th>
+          <th>Comprobado</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(parte, index) in partesPaginados" :key="parte._id">
+        <tr v-for="(order, index) in ordersPaged" :key="order._id">
           <th>{{ index + 1 + (pagination.page - 1) * 10 }}</th>
-          <td>{{ parte.fecha }}</td>
-          <td>{{ parte.matricula }}</td>
-          <td>{{ parte.motivo }}</td>
+          <td>{{ order.date }}</td>
+          <td>{{ order.license_plate }}</td>
+          <td>{{ order.fault }}</td>
           <td>
-            <span v-if="parte.reparado" class="icon has-text-success">
+            <span v-if="order.closed" class="icon has-text-success">
               <i class="fas fa-check-circle fa-lg"></i>
             </span>
             <span v-else class="icon has-text-danger">
@@ -107,7 +77,7 @@
             </span>
           </td>
           <td>
-            <span v-if="parte.cerrado" class="icon has-text-success">
+            <span v-if="order.finished" class="icon has-text-success">
               <i class="fas fa-check-circle fa-lg"></i>
             </span>
             <span v-else class="icon has-text-danger">
@@ -115,7 +85,7 @@
             </span>
           </td>
           <td>
-            <a class="button is-link" @click="editarParte(parte)">
+            <a class="button is-link" @click="editarParte(order)">
               <span class="icon">
                 <i class="fas fa-edit"></i>
               </span>
@@ -146,34 +116,22 @@ import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
 import Paginate from 'vuejs-paginate';
 
 export default {
-  name: 'partes-vue',
+  name: 'Orders',
   components: { Paginate },
   props: [],
   data() {
     return {
-      parteVacio: {
-        mecanico: '',
-        fecha: new Date().toISOString().split('T')[0],
-        matricula: '',
-        vehiculo: '',
-        averia: '',
-        reparacion: [],
-        observaciones: '',
-        fecha_f: '',
-        reparado: false,
-        cerrado: false
-      },
       filtro: ''
     };
   },
   computed: {
-    ...mapState('partes', [
-      'partes',
-      'filtroPartes',
+    ...mapState('orders', [
+      'orders',
+      'filtroOrders',
       'pagination',
       'paginaActual'
     ]),
-    ...mapGetters('partes', ['partesPaginados']),
+    ...mapGetters('orders', ['ordersPaged']),
     myPerPage: {
       // getter
       get: function() {
@@ -187,45 +145,37 @@ export default {
     }
   },
   mounted() {
-    this.filtro = this.filtroPartes;
+    this.filtro = this.filtroOrders;
     this.aplicaFiltro();
   },
   methods: {
-    ...mapActions('partes', ['getPartes', 'getPartesFiltro']),
-    ...mapMutations('partes', [
-      'setParte',
-      'setNuevoParte',
-      'setFiltroPartes',
+    ...mapActions('orders', ['getOrders']),
+    ...mapMutations('orders', [
+      'setOrder',
+      'setFiltro',
+      'resetOrder',
       'setPage',
       'setPerPage'
     ]),
     editarParte(payload) {
-      this.setParte(payload);
-      this.setNuevoParte(false);
-      this.$router.push({ name: 'parte' });
+      this.setFiltro(this.filtro);
+      this.setOrder(payload);
+      this.$router.push({ name: 'detail' });
     },
     masParte() {
-      this.setParte(this.parteVacio);
-      this.setNuevoParte(true);
-      this.$router.push({ name: 'parte' });
+      this.setFiltro(this.filtro);
+      this.resetOrder();
+      this.$router.push({ name: 'detail' });
     },
     aplicaFiltro() {
-      this.setFiltroPartes(this.filtro);
       switch (this.filtro) {
-        case 'T':
-          this.getPartesFiltro(this.filtro);
-          break;
         case 'R':
-          this.getPartesFiltro(this.filtro);
-          break;
-        case 'C':
-          this.getPartesFiltro(this.filtro);
+          this.setFiltro('R');
+          this.getOrders(true);
           break;
         case 'SR':
-          this.getPartesFiltro(this.filtro);
-          break;
-        case 'SC':
-          this.getPartesFiltro(this.filtro);
+          this.setFiltro('SR');
+          this.getOrders(false);
           break;
       }
     },

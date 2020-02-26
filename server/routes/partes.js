@@ -6,136 +6,136 @@ var app = express();
 
 // Obtener todos los partes
 app.get('/', (req, res) => {
-    Partes.find({})
-        .sort({ fecha: -1 })
-        .exec((err, partes) => {
-            if (err) {
-                return res.status(500).json({
-                    ok: false,
-                    mensaje: 'Error en base de partes',
-                    errors: err,
-                });
-            }
-
-            Partes.countDocuments({}, (err, cuenta) => {
-                if (err) {
-                    return res.status(400).json({
-                        ok: false,
-                        mensaje: 'Error en base de partes',
-                        errors: err,
-                    });
-                }
-
-                res.status(200).json({
-                    ok: true,
-                    partes,
-                    cuenta,
-                });
-            });
+  Partes.find({})
+    .sort({ fecha: -1 })
+    .exec((err, partes) => {
+      if (err) {
+        return res.status(500).json({
+          ok: false,
+          mensaje: 'Error en base de partes',
+          errors: err,
         });
+      }
+
+      Partes.countDocuments({}, (err, cuenta) => {
+        if (err) {
+          return res.status(400).json({
+            ok: false,
+            mensaje: 'Error en base de partes',
+            errors: err,
+          });
+        }
+
+        res.status(200).json({
+          ok: true,
+          partes,
+          cuenta,
+        });
+      });
+    });
 });
 
 // Obtener los partes segun filtro
 app.get('/:estado/:valor/estado', (req, res) => {
-    // eslint-disable-next-line no-unused-vars
-    const e = req.params.estado;
-    const v = req.params.valor;
+  // eslint-disable-next-line no-unused-vars
+  const e = req.params.estado;
+  const v = req.params.valor;
 
-    let criteria = {};
+  let criteria = {};
 
-    if (e === 'reparado') {
-        criteria = { reparado: v };
-    }
+  if (e === 'reparado') {
+    criteria = { reparado: v };
+  }
 
-    if (e === 'cerrado') {
-        criteria = { cerrado: v };
-    }
+  if (e === 'cerrado') {
+    criteria = { cerrado: v };
+  }
 
-    Partes.find(criteria)
-        .sort({ fecha: -1 })
-        .exec((err, partes) => {
-            if (err) {
-                return res.status(500).json({
-                    ok: false,
-                    mensaje: 'Error en base de partes',
-                    errors: err,
-                });
-            }
-
-            Partes.countDocuments({}, (err, cuenta) => {
-                if (err) {
-                    return res.status(400).json({
-                        ok: false,
-                        mensaje: 'Error en base de partes',
-                        errors: err,
-                    });
-                }
-
-                res.status(200).json({
-                    ok: true,
-                    partes,
-                    cuenta,
-                });
-            });
+  Partes.find(criteria)
+    .sort({ fecha: -1 })
+    .exec((err, partes) => {
+      if (err) {
+        return res.status(500).json({
+          ok: false,
+          mensaje: 'Error en base de partes',
+          errors: err,
         });
+      }
+
+      Partes.countDocuments({}, (err, cuenta) => {
+        if (err) {
+          return res.status(400).json({
+            ok: false,
+            mensaje: 'Error en base de partes',
+            errors: err,
+          });
+        }
+
+        res.status(200).json({
+          ok: true,
+          partes,
+          cuenta,
+        });
+      });
+    });
 });
 
 // Actualiza parte
 app.put('/:id', (req, res) => {
-    var id = req.params.id;
-    var body = req.body;
+  var id = req.params.id;
+  var body = req.body;
 
-    Partes.findById(id, (err, parte) => {
-        if (err) {
-            return res.status(500).json({
-                ok: false,
-                mensaje: 'Error al buscar parte',
-                errors: err,
-            });
-        }
+  Partes.findById(id, (err, parte) => {
+    if (err) {
+      return res.status(500).json({
+        ok: false,
+        mensaje: 'Error al buscar parte',
+        errors: err,
+      });
+    }
 
-        if (!parte) {
-            return res.status(400).json({
-                ok: false,
-                mensaje: 'Error al buscar parte, no existe',
-                errors: err,
-            });
-        }
+    if (!parte) {
+      return res.status(400).json({
+        ok: false,
+        mensaje: 'Error al buscar parte, no existe',
+        errors: err,
+      });
+    }
 
-        (parte.mecanico = body.mecanico),
-            (parte.fecha = body.fecha),
-            (parte.matricula = body.matricula),
-            (parte.vehiculo = body.vehiculo),
-            (parte.motivo = body.motivo),
-            (parte.km = body.km),
-            (parte.averia = body.averia),
-            (parte.reparacion = body.reparacion),
-            (parte.observaciones = body.observaciones),
-            (parte.fecha_f = body.fecha_f),
-            (parte.reparado = body.reparado),
-            (parte.cerrado = body.cerrado);
+    (parte.mecanico = body.mecanico),
+      (parte.fecha = body.fecha),
+      (parte.matricula = body.matricula),
+      (parte.vehiculo = body.vehiculo),
+      (parte.motivo = body.motivo),
+      (parte.km = body.km),
+      (parte.averia = body.averia),
+      (parte.reparacion = body.reparacion),
+      (parte.observaciones = body.observaciones),
+      (parte.fecha_f = body.fecha_f),
+      (parte.reparado = body.reparado),
+      (parte.cerrado = body.cerrado);
 
-        parte.save((err, parteGuardado) => {
-            if (err) {
-                return res.status(400).json({
-                    ok: false,
-                    mensaje: 'Error al guardar parte',
-                    errors: err,
-                });
-            }
-            res.status(201).json({
-                ok: true,
-                parteGuardado: parteGuardado,
-            });
+    parte.save((err, parteGuardado) => {
+      if (err) {
+        return res.status(400).json({
+          ok: false,
+          mensaje: 'Error al guardar parte',
+          errors: err,
         });
+      }
+      res.status(201).json({
+        ok: true,
+        parteGuardado: parteGuardado,
+      });
     });
+  });
 });
 
 // Crea parte
 app.post('/', (req, res) => {
-    var body = req.body;
+  var body = req.body;
 
-    /*     const parte = new Partes({
+  /*     const parte = new Partes({
             mecanico: body.mecanico,
             fecha: body.fecha,
             matricula: body.matricula,
@@ -148,49 +148,49 @@ app.post('/', (req, res) => {
             cerrado: body.cerrado
         }); */
 
-    const parte = new Partes(body);
+  const parte = new Partes(body);
 
-    parte.save((err, parteGuardado) => {
-        if (err) {
-            return res.status(400).json({
-                ok: false,
-                mensaje: 'Error al crear parte',
-                errors: err,
-            });
-        }
-        res.status(201).json({
-            ok: true,
-            parteGuardado: parteGuardado,
-        });
+  parte.save((err, parteGuardado) => {
+    if (err) {
+      return res.status(400).json({
+        ok: false,
+        mensaje: 'Error al crear parte',
+        errors: err,
+      });
+    }
+    res.status(201).json({
+      ok: true,
+      parteGuardado: parteGuardado,
     });
+  });
 });
 
 // Borrar parte
 app.delete('/:id', (req, res) => {
-    var id = req.params.id;
+  var id = req.params.id;
 
-    Partes.findByIdAndRemove(id, (err, parteBorrado) => {
-        if (err) {
-            return res.status(500).json({
-                ok: false,
-                mensaje: 'Error al borrar parte',
-                errors: err,
-            });
-        }
+  Partes.findByIdAndRemove(id, (err, parteBorrado) => {
+    if (err) {
+      return res.status(500).json({
+        ok: false,
+        mensaje: 'Error al borrar parte',
+        errors: err,
+      });
+    }
 
-        if (!parteBorrado) {
-            return res.status(400).json({
-                ok: false,
-                mensaje: 'Error al borrar parte, no existe parte',
-                errors: err,
-            });
-        }
+    if (!parteBorrado) {
+      return res.status(400).json({
+        ok: false,
+        mensaje: 'Error al borrar parte, no existe parte',
+        errors: err,
+      });
+    }
 
-        res.status(200).json({
-            ok: true,
-            parteBorrado: parteBorrado,
-        });
+    res.status(200).json({
+      ok: true,
+      parteBorrado: parteBorrado,
     });
+  });
 });
 
 module.exports = app;
