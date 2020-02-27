@@ -152,3 +152,20 @@ export async function getOrder({ commit, state }, payload) {
     console.log('La petición para obtener los daros ha finalizado');
   }
 }
+
+export async function getOrdersLast({ state }, payload) {
+  try {
+    const { data } = await Vue.axios({
+      method: 'get',
+      url: state.urlApi + `workshop/orders/last/${payload}`
+    });
+    return data.order_id || 0;
+  } catch (e) {
+    console.log('todosError', e.message);
+    console.log(e.response.data);
+    console.log(e.response.status);
+    console.log(e.response.headers);
+  } finally {
+    console.log('La petición para obtener los daros ha finalizado');
+  }
+}

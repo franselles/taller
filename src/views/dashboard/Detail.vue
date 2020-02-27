@@ -3,15 +3,7 @@
     <nav class="breadcrumb notification is-info" aria-label="breadcrumbs">
       <ul>
         <li>
-          <router-link to="/open">
-            <span class="icon">
-              <i class="fas fa-home"></i>
-            </span>
-            VOLVER</router-link
-          >
-        </li>
-        <li>
-          PARTE DE TRABAJO
+          PARTE DE TRABAJO - {{ localOrder.year }} - {{ localOrder.order_id }}
         </li>
       </ul>
     </nav>
@@ -136,48 +128,42 @@
         </div>
 
         <div>
-          <div
-            class="card"
-            v-for="(image, index) in localOrder.images"
-            :key="image.index"
-          >
-            <div class="card-content">
-              <div class="media">
-                <div class="media-left">
-                  <figure class="image is-48x48">
-                    <img :src="image.thumb_url" width="128px" height="auto" />
-                  </figure>
+          <ul class="card-list">
+            <li v-for="image in localOrder.images" :key="image.index">
+              <figure>
+                <img :src="image.thumb_url" width="128px" />
+              </figure>
+              <div class="field is-grouped">
+                <div>
+                  <button
+                    class="button is-danger"
+                    type="button"
+                    @click="deleteLocalImage(image, index)"
+                  >
+                    BORRAR
+                  </button>
                 </div>
-                <div class="media-content">
-                  <div class="field is-grouped">
-                    <div>
-                      <button
-                        class="button is-danger"
-                        type="button"
-                        @click="deleteLocalImage(image, index)"
-                      >
-                        BORRAR
-                      </button>
-                    </div>
-                    <div>
-                      <button
-                        class="button is-success"
-                        type="button"
-                        @click="showImage(image)"
-                      >
-                        VER
-                      </button>
-                    </div>
-                  </div>
+                <div>
+                  <button
+                    class="button is-success"
+                    type="button"
+                    @click="showImage(image)"
+                  >
+                    VER
+                  </button>
                 </div>
               </div>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
+
         <div class="notification is-warning" v-if="waitImage">
           PROCESANDO LA IMAGEN ESPERA
         </div>
-        <div class="field is-grouped">
+
+        <br /><br />
+
+        <div class="buttons is-centered">
           <div>
             <button
               class="button is-link is-warning"
@@ -223,6 +209,8 @@ export default {
     return {
       localOrder: {
         _id: null,
+        order_id: null,
+        year: null,
         date: null,
         fault: null,
         vehicle_id: null,
@@ -257,7 +245,8 @@ export default {
       'putOrder',
       'getOrders',
       'deleteImage',
-      'deleteOrder'
+      'deleteOrder',
+      'getOrdersLast'
     ]),
     ...mapMutations('orders', ['setOrder', 'setCurrentImage']),
     onFileChange(e) {
@@ -317,8 +306,15 @@ export default {
       if (this.localOrder._id == null) {
         // this.postOrder(this.localOrder).then(() => {
         //   this.getOrders(false).then(() => this.$router.go(-1));
-        this.postOrder(this.localOrder).then(() => {
-          this.$router.go(-1);
+
+        let y = new Date();
+        this.localOrder.year = y.getFullYear();
+        this.getOrdersLast(this.localOrder.year).then(result => {
+          let next = result + 1;
+          this.localOrder.order_id = next;
+          this.postOrder(this.localOrder).then(() => {
+            this.$router.go(-1);
+          });
         });
       } else {
         // this.putOrder(this.localOrder).then(() => {
@@ -344,13 +340,8 @@ export default {
     },
     deleteLocalImage(data, index) {
       this.localOrder.images.splice(index, 1);
-      // this.deleteImage(data.delete_url).then(result => {
-      //   console.log(result);
-      //   this.localOrder.images.splice(index, 1);
-      // });
     },
     showImage(data) {
-      console.log(data);
       this.setOrder(this.localOrder);
       this.setCurrentImage(data);
       this.$router.push({ name: 'showimage' });
@@ -377,5 +368,11 @@ export default {
 
 .thumb {
   padding: 10px;
+}
+
+.card-list {
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: repeat(5, minmax(100px, 1fr));
 }
 </style>

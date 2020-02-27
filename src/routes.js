@@ -36,6 +36,11 @@ export default [
         component: () => import('./views/dashboard/Detail.vue')
       },
       {
+        path: 'detailprint',
+        name: 'detailprint',
+        component: () => import('./views/dashboard/DetailPrint.vue')
+      },
+      {
         path: 'showimage',
         name: 'showimage',
         component: () => import('./views/dashboard/ShowImage.vue')

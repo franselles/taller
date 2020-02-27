@@ -3,6 +3,8 @@ export default {
   urlApi: '/api/v1/', // http://localhost:8000/api/v1/    // /api/v1/
   order: {
     _id: null,
+    order_id: null,
+    year: null,
     date: null,
     fault: null,
     vehicle_id: null,

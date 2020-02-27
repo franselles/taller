@@ -1,61 +1,61 @@
 <template>
   <section>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <router-link class="navbar-item" :to="{ name: 'principal' }">
-          <img src="../../assets/mecanica.png" width="28" height="28" />
-        </router-link>
+    <div class="noprint">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <router-link class="navbar-item" :to="{ name: 'principal' }">
+            <img src="../../assets/mecanica.png" width="28" height="28" />
+          </router-link>
 
-        <a
-          role="button"
-          class="navbar-burger burger"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbarBasicExample"
-          @click="menuBurger"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-          <router-link class="navbar-item" :to="{ name: 'principal' }"
-            >Inicio</router-link
+          <a
+            role="button"
+            class="navbar-burger burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+            @click="menuBurger"
           >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
 
-          <router-link :to="{ name: 'orders' }" class="navbar-item">
-            Partes</router-link
-          >
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <router-link class="navbar-item" :to="{ name: 'principal' }"
+              >Inicio</router-link
+            >
 
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">Opciones</a>
+            <router-link :to="{ name: 'orders' }" class="navbar-item">
+              Partes</router-link
+            >
 
-            <div class="navbar-dropdown">
-              <router-link :to="{ name: 'partes' }" class="navbar-item"
-                >Partes sistema anterior</router-link
-              >
-              <a class="navbar-item">Opcion 2</a>
-              <a class="navbar-item">Opcion 3</a>
-              <hr class="navbar-divider" />
-              <a class="navbar-item">Notificar</a>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">Opciones</a>
+
+              <div class="navbar-dropdown">
+                <router-link :to="{ name: 'partes' }" class="navbar-item"
+                  >Partes sistema anterior</router-link
+                >
+                <hr class="navbar-divider" />
+                <a class="navbar-item">Notificar</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a @click="logout" class="button is-danger">
+                  <strong>Logout</strong>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <a @click="logout" class="button is-danger">
-                <strong>Logout</strong>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
     <router-view />
   </section>
 </template>
@@ -107,3 +107,11 @@ export default {
   computed: {}
 };
 </script>
+
+<style>
+@media print {
+  .noprint {
+    display: none;
+  }
+}
+</style>

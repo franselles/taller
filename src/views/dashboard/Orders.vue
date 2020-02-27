@@ -91,6 +91,12 @@
               </span>
               <span>EDITAR</span>
             </a>
+            <a class="button is-link is-warning" @click="printParte(order)">
+              <span class="icon">
+                <i class="fas fa-print"></i>
+              </span>
+              <span>IMPRIMIR</span>
+            </a>
           </td>
         </tr>
       </tbody>
@@ -161,6 +167,11 @@ export default {
       this.setFiltro(this.filtro);
       this.setOrder(payload);
       this.$router.push({ name: 'detail' });
+    },
+    printParte(payload) {
+      this.setFiltro(this.filtro);
+      this.setOrder(payload);
+      this.$router.push({ name: 'detailprint' });
     },
     masParte() {
       this.setFiltro(this.filtro);
