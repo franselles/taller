@@ -3,6 +3,8 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
+import './../node_modules/bulma/css/bulma.min.css';
+
 require('./plugins');
 
 Vue.config.productionTip = false;
