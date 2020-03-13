@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section class="section">
     <nav class="breadcrumb notification is-info" aria-label="breadcrumbs">
       <ul>
         <li>
@@ -143,7 +143,7 @@
         </div>
       </form>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="section">
     <div class="columns">
       <div class="column is-6">
         <div class="field">

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section class="section">
     <nav class="breadcrumb notification is-info" aria-label="breadcrumbs">
       <ul>
         <li>
@@ -17,7 +17,7 @@
     <div>
       <img :src="url_img.image_url" width="100%" height="auto" />
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
